@@ -28,18 +28,12 @@ INDEXER		:=	ranlib
 DELETE		:=	rm -f
 CREATEDIR	:=	mkdir -p
 DELETEDIR	:=	rm -Rf
-ifeq ($(shell uname -s),Darwin)
-	ECHO	:=	echo
-else
-	ECHO	:=	echo -e
-endif
 
 # Colors
-REG			:=	'\033[0;37m'
-GRN			:=	'\033[1;32m'
-RED			:=	'\033[1;31m'
-YLW			:=	'\033[1;33m'
-CLR			:=	'\033[0m'
+GRN			:=	"\033[1;32m"
+RED			:=	"\033[1;31m"
+YLW			:=	"\033[1;33m"
+CLR			:=	"\033[0m"
 
 # Source, Objects and Resources
 SOURCES		:=	ft_abs.c			ft_atoi.c			ft_bzero.c			\
@@ -63,7 +57,7 @@ OBJECTS		:=	$(patsubst %,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 # Defauilt Make
 all			:	outdir $(NAME)
-				@ $(ECHO) $(GRN)$(NAME) $(REG)Generated Successfully!$(CLR)
+				@ echo $(GRN)$(NAME) $(REG)Generated Successfully!$(CLR)
 
 outdir		:
 				@ $(CREATEDIR) $(OBJDIR)
@@ -82,9 +76,9 @@ clean		:
 ifneq ($(wildcard $(OBJDIR)*.o),)
 	@ $(DELETE) $(OBJECTS)
 	@ $(DELETEDIR) $(OBJDIR)
-	@ $(ECHO) $(YLW)$(basename $(NAME)) $(REG)Object Files Deleted!$(CLR)
+	@ echo $(YLW)$(NAME)$(CLR) Object Files Deleted!
 else
-	@ $(ECHO) $(REG)No $(RED)$(basename $(NAME)) $(REG)Object Files To Remove..$(CLR)
+	@ echo No $(RED)$(NAME)$(CLR) Object Files To Remove..
 endif
 
 # Full Clean
@@ -93,9 +87,9 @@ ifneq ($(wildcard $(NAME)),)
 	@ $(DELETE) $(NAME)
 	@ $(DELETE) $(OBJECTS)
 	@ $(DELETEDIR) $(OBJDIR)
-	@ $(ECHO) $(YLW)$(basename $(NAME)) $(REG)Binary \& Object Files Deleted!$(CLR)
+	@ echo $(YLW)$(NAME)$(CLR) Binary \& Object Files Deleted!
 else
-	@ $(ECHO) $(REG)No $(RED)$(basename $(NAME)) $(REG)Binary Or Object Files To Remove..$(CLR)
+	@ echo $(REG)No $(RED)$(NAME)$(CLR) Binary Or Object Files To Remove..
 endif
 
 # Recompile
