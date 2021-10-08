@@ -57,7 +57,7 @@ OBJECTS		:=	$(patsubst %,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 # Defauilt Make
 all			:	outdir $(NAME)
-				@ echo $(GRN)$(NAME) $(REG)Generated Successfully!$(CLR)
+				@ echo $(GRN)$(basename $(NAME))$(CLR) Generated Successfully!
 
 outdir		:
 				@ $(CREATEDIR) $(OBJDIR)
@@ -76,9 +76,9 @@ clean		:
 ifneq ($(wildcard $(OBJDIR)*.o),)
 	@ $(DELETE) $(OBJECTS)
 	@ $(DELETEDIR) $(OBJDIR)
-	@ echo $(YLW)$(NAME)$(CLR) Object Files Deleted!
+	@ echo $(YLW)$(basename $(NAME))$(CLR) Object Files Deleted!
 else
-	@ echo No $(RED)$(NAME)$(CLR) Object Files To Remove..
+	@ echo No $(RED)$(basename $(NAME))$(CLR) Object Files To Remove..
 endif
 
 # Full Clean
@@ -87,9 +87,9 @@ ifneq ($(wildcard $(NAME)),)
 	@ $(DELETE) $(NAME)
 	@ $(DELETE) $(OBJECTS)
 	@ $(DELETEDIR) $(OBJDIR)
-	@ echo $(YLW)$(NAME)$(CLR) Binary \& Object Files Deleted!
+	@ echo $(YLW)$(basename $(NAME))$(CLR) Binary \& Object Files Deleted!
 else
-	@ echo $(REG)No $(RED)$(NAME)$(CLR) Binary Or Object Files To Remove..
+	@ echo $(REG)No $(RED)$(basename $(NAME))$(CLR) Binary Or Object Files To Remove..
 endif
 
 # Recompile
