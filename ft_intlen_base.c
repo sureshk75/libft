@@ -12,15 +12,17 @@
 
 int	ft_intlen_base(unsigned long long num, int base)
 {
-	int	len;
+	static int	len = 0;
 
-	if (num == 0)
-		return (1);
-	len = 0;
-	while (num > 0)
+	if (num > 0)
 	{
-		num /= base;
-		len += 1;
+		while (num > 0)
+		{
+			num /= base;
+			len += 1;
+		}
 	}
+	else
+		len = 1;
 	return (len);
 }
