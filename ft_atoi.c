@@ -14,27 +14,23 @@
 
 int	ft_atoi(const char *str)
 {
-	size_t	i;
-	long	val;
-	int		neg;
+	static size_t	i = 0;
+	static long		val = 0;
+	static int		neg = 1;
 
-	i = 0;
-	val = 0;
-	neg = 1;
 	while (ft_isspace(str[i]))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
-		if (str[i] == '-')
+		if (str[i++] == '-')
 			neg = -1;
-		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		val = val * 10 + (str[i] - '0');
-		if (neg == 1 && val > 2147483647)
+		if (neg == 1 && val > INT_MAX)
 			return (-1);
-		if (neg == -1 && (val - 1) > 2147483647)
+		else if (neg == -1 && (val - 1) > INT_MAX)
 			return (0);
 		i++;
 	}
