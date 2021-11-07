@@ -27,12 +27,11 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		val = val * 10 + (str[i] - '0');
+		val = val * 10 + (str[i++] - '0');
 		if (neg == 1 && val > INT_MAX)
 			return (-1);
 		else if (neg == -1 && (val - 1) > INT_MAX)
 			return (0);
-		i++;
 	}
 	return ((signed int)val * neg);
 }
