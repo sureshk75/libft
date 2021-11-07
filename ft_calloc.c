@@ -14,22 +14,20 @@
 
 void	*ft_calloc(size_t nitems, size_t size)
 {
-	char	*ptr1;
-	char	*ptr2;
-	size_t	i;
+	char	*ret;
+	size_t	len;
 
 	if (nitems == 0 || size == 0)
 	{
 		nitems = 1;
 		size = 1;
 	}
-	i = nitems * size;
-	ptr1 = (char *)malloc(sizeof(char) * i);
-	if (ptr1)
+	len = nitems * size;
+	ret = malloc(sizeof(ret) * len);
+	if (ret)
 	{
-		ptr2 = ptr1;
-		while (i--)
-			*ptr2++ = 0;
+		while (len--)
+			ret[len] = 0;
 	}
-	return (ptr1);
+	return (ret);
 }
