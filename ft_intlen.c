@@ -12,7 +12,17 @@
 
 int	ft_intlen(unsigned long n)
 {
-	if (n >= 10)
-		return (ft_intlen(n / 10) + 1);
-	return (1);
+	static int	len = 0;
+
+	if (num > 0)
+	{
+		while (num > 0)
+		{
+			num /= 10;
+			len += 1;
+		}
+	}
+	else
+		len = 1;
+	return (len);
 }
