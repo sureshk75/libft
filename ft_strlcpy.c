@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 08:27:27 by schetty           #+#    #+#             */
-/*   Updated: 2021/11/12 10:00:33 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/12 11:27:21 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	len;
 
-	if (!src)
-		return (0);
+	// if (!src)
+	// 	return (0);
 	len = 0;
 	while (src[len])
 		len++;

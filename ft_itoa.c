@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 13:46:03 by schetty           #+#    #+#             */
-/*   Updated: 2021/11/11 18:26:17 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/12 11:55:29 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@ char	*ft_itoa(int n)
 	long	nb;
 	char	*str;
 
+	len = ft_intlen_base(n, 10);
 	nb = n;
-	len = !n;
-	if (n < 0 && ++len)
-		n = -n;
-	while (n && ++len)
-		n /= 10;
 	if (nb < 0)
+	{
 		nb = -nb;
+		len += 1;
+	}
 	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
 	str[len] = '\0';
 	if (nb == 0)
 		str[--len] = '0';
