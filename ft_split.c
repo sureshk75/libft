@@ -6,70 +6,70 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 01:42:49 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/20 23:31:24 by schetty          ###   ########.fr       */
+/*   Updated: 2021/05/20 23:55:08 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	init_vals(char const *s, char c, int *trk)
+static int	init_vals(char const *s, char c, int *trek)
 {
 	int	i;
-	int	j;
+	int	count;
 
-	*trk = 0;
-	while (s[*trk])
-		*trk += 1;
 	i = 0;
-	j = 0;
-	while (s[i])
+	count = 0;
+	*trek = ft_strlen(s);
+	while (1)
 	{
+		if (s[i] == '\0')
+			break ;
 		while (s[i] && s[i] == c)
 			i++;
 		if (s[i] && s[i] != c)
 		{
 			while (s[i] && s[i] != c)
 				i++;
-			j++;
+			count++;
 		}
 	}
-	return (j);
+	return (count);
 }
 
-static char	*get_str(char const *s, int *trk, char c)
+static char	*get_str(char const *s, int *trek, char c)
 {
 	int	size;
 
 	size = 0;
-	while (*trk && s[*trk - 1] == c)
-		*trk -= 1;
-	while (*trk && s[*trk - 1] != c)
+	while (*trek && s[*trek - 1] == c)
+		*trek -= 1;
+	while (*trek && s[*trek - 1] != c)
 	{
-		*trk -= 1;
+		*trek -= 1;
 		size++;
 	}
-	return (ft_substr(s, *trk, size));
+	return (ft_substr(s, *trek, size));
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		wrd;
+	int		count;
 	char	**str;
-	int		trk;
+	int		trek;
 
 	if (!s)
 		return (NULL);
-	wrd = init_vals(s, c, &trk);
-	str = (char **)ft_calloc(sizeof(char *), wrd + 1);
+	count = init_vals(s, c, &trek);
+	str = (char **)ft_calloc(sizeof(char *), count + 1);
 	if (!str)
 		return (NULL);
-	while (wrd--)
+	while (count--)
 	{
-		str[wrd] = get_str(s, &trk, c);
-		if (str[wrd] == NULL)
+		str[count] = get_str(s, &trek, c);
+		if (str[count] == NULL)
 		{
-			while (--wrd)
-				free(str[wrd]);
+			while (--count)
+				free(str[count]);
 			free(str);
 			return (NULL);
 		}

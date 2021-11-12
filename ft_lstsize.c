@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 21:59:14 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/11 14:21:46 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/11 21:48:35 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,10 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int		i;
-	t_list	*ptr;
+	int	len;
 
-	i = 0;
-	if (lst)
-	{
-		i++;
-		ptr = lst;
-		while (ptr->next)
-		{
-			ptr = ptr->next;
-			i++;
-		}
-	}
-	return (i);
+	len = 0;
+	while (lst && ++len)
+		lst = lst->next;
+	return (len);
 }

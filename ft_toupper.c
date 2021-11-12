@@ -6,13 +6,13 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 19:34:14 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/07 19:39:43 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/12 01:48:35 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
+	if (c > 96 && c < 123)
 		return (c - 32);
 	return (c);
 }

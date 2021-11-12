@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 21:42:09 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/12 19:53:34 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/11 18:14:39 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 void	*ft_calloc(size_t nitems, size_t size)
 {
-	char	*ret;
 	size_t	len;
+	char	*ret;
 
 	if (nitems == 0 || size == 0)
-	{
-		nitems = 1;
-		size = 1;
-	}
-	len = nitems * size;
-	ret = malloc(sizeof(ret) * len);
+		len = 1;
+	else
+		len = nitems * size;
+	ret = malloc(sizeof(char) * len);
 	if (ret)
 	{
 		while (len--)

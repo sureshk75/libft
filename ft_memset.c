@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 15:07:41 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/06 22:55:21 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/10 02:44:07 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	char			*ptr1;
-	unsigned char	ptr2;
+	char	*src;
+	char	chr;
 
-	ptr1 = s;
-	ptr2 = (unsigned char)c;
+	src = s;
+	chr = (unsigned char)c;
 	while (n--)
-		*ptr1++ = ptr2;
+		*src++ = chr;
 	return (s);
 }

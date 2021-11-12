@@ -6,13 +6,13 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 19:39:56 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/07 19:42:15 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/12 01:48:09 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
+	if (c > 64 && c < 91)
 		return (c + 32);
 	return (c);
 }

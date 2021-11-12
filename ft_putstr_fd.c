@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 15:54:33 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/19 20:22:54 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/10 02:48:58 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	i;
+	size_t	len;
 
-	if (!s || fd < 0)
+	if (!s)
 		return ;
-	i = 0;
-	while (s[i])
-		i++;
-	write(fd, s, i);
+	len = 0;
+	while (s[len])
+		len++;
+	write(fd, s, len);
 }

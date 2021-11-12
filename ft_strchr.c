@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 09:34:09 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/08 04:01:16 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/09 22:22:49 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
 
+	if (c > CHAR_MAX)
+		return ((char *)s);
 	i = -1;
 	while (s[++i] != c)
 	{

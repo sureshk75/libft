@@ -6,94 +6,67 @@
 #    By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 17:31:06 by schetty           #+#    #+#              #
-#    Updated: 2021/10/01 23:43:34 by schetty          ###   ########.fr        #
+#    Updated: 2021/11/11 18:24:22 by schetty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Compiler and Linker
-CC			:=	gcc
+NAME		=	libft.a
 
-# Target Binary Program
-NAME		:=	libft.a
+CC			=	gcc
 
-# Directories
-OBJDIR		:= obj/
+CFLAGS		=	-Wall -Wextra -Werror
 
-# Flags, Libraries and Includes
-CFLAGS		:=	-Wall -Wextra -Werror
+RM			=	rm -f
 
-# Functions
-ARCHIVE		:=	ar rc
-INDEXER		:=	ranlib
-DELETE		:=	rm -f
-CREATEDIR	:=	mkdir -p
-DELETEDIR	:=	rm -Rf
+AR			=	ar rc
 
-# Colors
-GRN			:=	"\033[1;32m"
-RED			:=	"\033[1;31m"
-YLW			:=	"\033[1;33m"
-CLR			:=	"\033[0m"
+RL			=	ranlib
 
-# Source, Objects and Resources
-SOURCES		:=	ft_abs.c			ft_atoi.c			ft_bzero.c			\
-				ft_calloc.c			ft_intlen.c			ft_isalnum.c		\
-				ft_isalpha.c		ft_isascii.c		ft_ischar.c			\
-				ft_isdigit.c		ft_isprint.c		ft_isset.c			\
-				ft_isspace.c		ft_itoa.c			ft_lstadd_back.c	\
-				ft_lstadd_front.c	ft_lstclear.c		ft_lstdelone.c		\
-				ft_lstiter.c		ft_lstlast.c		ft_lstmap.c			\
-				ft_lstnew.c			ft_lstsize.c		ft_memccpy.c		\
-				ft_memchr.c			ft_memcmp.c			ft_memcpy.c			\
-				ft_memmove.c		ft_memset.c			ft_intlen_base.c	\
-				ft_putchar_fd.c		ft_putendl_fd.c		ft_putnbr_fd.c		\
-				ft_putstr_fd.c		ft_split.c			ft_strchr.c			\
-				ft_strdup.c			ft_strjoin.c		ft_strlcat.c		\
-				ft_strlcpy.c		ft_strlen.c			ft_strmapi.c		\
-				ft_strncmp.c		ft_strnstr.c		ft_strrchr.c		\
-				ft_strtrim.c		ft_substr.c			ft_tolower.c		\
-				ft_toupper.c
-OBJECTS		:=	$(patsubst %,$(OBJDIR)%,$(SOURCES:.c=.o))
+SRC			=	ft_atoi.c			ft_bzero.c			ft_calloc.c		\
+				ft_intlen_base.c	ft_isalnum.c		ft_isalpha.c	\
+				ft_isascii.c		ft_ischar.c			ft_isdigit.c	\
+				ft_isprint.c		ft_isset.c			ft_isspace.c	\
+				ft_itoa.c			ft_memccpy.c		ft_memchr.c		\
+				ft_memcmp.c			ft_memcpy.c			ft_memmove.c	\
+				ft_memset.c			ft_putchar_fd.c		ft_putendl_fd.c	\
+				ft_putnbr_fd.c		ft_putstr_fd.c		ft_split.c		\
+				ft_strchr.c			ft_strdup.c			ft_striteri.c	\
+				ft_strjoin.c		ft_strlcat.c		ft_strlcpy.c	\
+				ft_strlen.c			ft_strmapi.c		ft_strncmp.c	\
+				ft_strnstr.c		ft_strrchr.c		ft_strtrim.c	\
+				ft_substr.c			ft_tolower.c		ft_toupper.c
 
-# Defauilt Make
-all			:	outdir $(NAME)
-				@ echo $(GRN)$(basename $(NAME))$(CLR) Generated Successfully!
+B_SRC		=	ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c	\
+				ft_lstdelone.c		ft_lstiter.c		ft_lstlast.c	\
+				ft_lstmap.c			ft_lstnew.c			ft_lstsize.c
 
-outdir		:
-				@ $(CREATEDIR) $(OBJDIR)
+OBJ			= 	$(SRC:.c=.o)
 
-# Link
-$(NAME)		:	$(OBJECTS)
-				@ $(ARCHIVE) $(NAME) $(OBJECTS)
-				@ $(INDEXER) $(NAME)
+B_OBJ		=	$(B_SRC:.c=.o)
 
-# Compile
-$(OBJDIR)%.o:	%.c
+all			:	$(NAME)
+
+$(NAME)		: 	$(OBJ)
+				@ echo Generating Standard $(NAME)..
+				@ $(AR) $(NAME) $(OBJ)
+				@ $(RL) $(NAME)
+
+.c.o		:
 				@ $(CC) $(CFLAGS) -c $< -o $@
 
-# Clean Objects
 clean		:
-ifneq ($(wildcard $(OBJDIR)*.o),)
-	@ $(DELETE) $(OBJECTS)
-	@ $(DELETEDIR) $(OBJDIR)
-	@ echo $(YLW)$(basename $(NAME))$(CLR) Object Files Deleted!
-else
-	@ echo No $(RED)$(basename $(NAME))$(CLR) Object Files To Remove..
-endif
+				@ echo Removing Object Files..
+				@ $(RM) $(OBJ) $(B_OBJ)
 
-# Full Clean
-fclean		:
-ifneq ($(wildcard $(NAME)),)
-	@ $(DELETE) $(NAME)
-	@ $(DELETE) $(OBJECTS)
-	@ $(DELETEDIR) $(OBJDIR)
-	@ echo $(YLW)$(basename $(NAME))$(CLR) Binary \& Object Files Deleted!
-else
-	@ echo $(REG)No $(RED)$(basename $(NAME))$(CLR) Binary Or Object Files To Remove..
-endif
+fclean		:	clean
+				@ echo Removing $(NAME)..
+				@ $(RM) $(NAME)
 
-# Recompile
 re			:	fclean all
 
-# Non-File Targets
+bonus		:	$(OBJ) $(B_OBJ)
+				@ echo Generating Bonus $(NAME)..
+				@ $(AR) $(NAME) $(OBJ) $(B_OBJ)
+				@ $(RL) $(NAME)
+
 .PHONY		:	all clean fclean re

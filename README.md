@@ -5,3 +5,7 @@
 
 # Cloning
 Enter `git clone https://github.com/sureshk75/libft.git`
+
+# Changes
+*12 Nov 21* Recoded some functions to make them portable.
+            Replaced `ft_intlen` with `ft_intlen_base`.

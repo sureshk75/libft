@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 16:31:59 by schetty           #+#    #+#             */
-/*   Updated: 2021/11/10 19:57:46 by schetty          ###   ########.fr       */
+/*   Created: 2021/11/09 22:32:14 by schetty           #+#    #+#             */
+/*   Updated: 2021/11/11 22:17:33 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	char	*ptr;
+	size_t	i;
 
-	ptr = s;
-	while (n--)
-		ptr[n] = 0;
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (*s)
+		f(i++, s++);
 }

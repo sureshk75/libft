@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/01 05:39:10 by schetty           #+#    #+#             */
-/*   Updated: 2021/10/02 16:57:57 by schetty          ###   ########.fr       */
+/*   Created: 2021/11/10 19:38:07 by schetty           #+#    #+#             */
+/*   Updated: 2021/11/12 10:45:36 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-long long	ft_abs(long long n)
+int	ft_abs(int i)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	if (i < 0)
+		return (-i);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 22:10:03 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/19 19:55:39 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/10 03:10:15 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*tmp;
+	t_list	*ptr;
 
-	if (!lst || !new)
-		return ;
 	if (*lst)
 	{
-		tmp = *lst;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
+		ptr = *lst;
+		while (ptr->next)
+			ptr = ptr->next;
+		ptr->next = new;
 	}
 	else
 		*lst = new;

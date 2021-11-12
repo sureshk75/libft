@@ -5,24 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/01 12:50:20 by schetty           #+#    #+#             */
-/*   Updated: 2021/10/02 16:58:25 by schetty          ###   ########.fr       */
+/*   Created: 2021/11/11 18:11:29 by schetty           #+#    #+#             */
+/*   Updated: 2021/11/11 18:14:42 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_intlen_base(unsigned long long num, int base)
+int	ft_intlen_base(int n, int base)
 {
-	static int	len = 0;
+	int		len;
+	long	nbr;
 
-	if (num > 0)
+	len = !n;
+	nbr = n;
+	if (n < 0)
+		nbr *= -1;
+	while (nbr)
 	{
-		while (num > 0)
-		{
-			num /= base;
-			len += 1;
-		}
+		nbr /= base;
+		len++;
 	}
-	else
-		len = 1;
 	return (len);
 }

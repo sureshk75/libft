@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 22:19:59 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/10 22:24:42 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/10 00:31:37 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
 	if (!lst)
 		return ;
-	(*del)(lst->content);
+	del(lst->content);
 	free(lst);
 }

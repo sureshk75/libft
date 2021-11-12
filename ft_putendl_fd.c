@@ -6,7 +6,7 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 16:06:13 by schetty           #+#    #+#             */
-/*   Updated: 2021/05/19 20:23:51 by schetty          ###   ########.fr       */
+/*   Updated: 2021/11/10 02:47:32 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	if (!s || fd < 0)
-		return ;
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	size_t	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	write(fd, s, len);
+	write(fd, "\n", 1);
 }
