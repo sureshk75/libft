@@ -6,23 +6,36 @@
 #    By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 17:31:06 by schetty           #+#    #+#              #
-#    Updated: 2021/11/11 18:24:22 by schetty          ###   ########.fr        #
+#    Updated: 2021/11/13 00:50:02 by schetty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	libft.a
+# Compiler and Linker
+CC			:=	gcc
 
-CC			=	gcc
+# Target Binary Program
+NAME		:=	libft.a
 
-CFLAGS		=	-Wall -Wextra -Werror
+# Directories
+OBJDIR		:= obj/
 
-RM			=	rm -f
+# Flags, Libraries and Includes
+CFLAGS		:=	-Wall -Wextra -Werror
 
-AR			=	ar rc
+# Functions
+ARCHIVE		:=	ar rc
+INDEXER		:=	ranlib
+DELETE		:=	rm -f
+CREATEDIR	:=	mkdir -p
+DELETEDIR	:=	rm -Rf
 
-RL			=	ranlib
+# Colors
+GRN			:=	"\033[1;32m"
+RED			:=	"\033[1;31m"
+YLW			:=	"\033[1;33m"
+CLR			:=	"\033[0m"
 
-SRC			=	ft_atoi.c			ft_bzero.c			ft_calloc.c		\
+SOURCE		:=	ft_atoi.c			ft_bzero.c			ft_calloc.c		\
 				ft_intlen_base.c	ft_isalnum.c		ft_isalpha.c	\
 				ft_isascii.c		ft_ischar.c			ft_isdigit.c	\
 				ft_isprint.c		ft_isset.c			ft_isspace.c	\
@@ -36,37 +49,57 @@ SRC			=	ft_atoi.c			ft_bzero.c			ft_calloc.c		\
 				ft_strnstr.c		ft_strrchr.c		ft_strtrim.c	\
 				ft_substr.c			ft_tolower.c		ft_toupper.c
 
-B_SRC		=	ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c	\
+BONUS_SOURCE:=	ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c	\
 				ft_lstdelone.c		ft_lstiter.c		ft_lstlast.c	\
 				ft_lstmap.c			ft_lstnew.c			ft_lstsize.c
 
-OBJ			= 	$(SRC:.c=.o)
+OBJECT		:= 	$(patsubst %,$(OBJDIR)%,$(SOURCE:.c=.o))
 
-B_OBJ		=	$(B_SRC:.c=.o)
+BONUS_OBJECT:=	$(patsubst %,$(OBJDIR)%,$(BONUS_SOURCE:.c=.o))
 
-all			:	$(NAME)
+# Defauilt Make
+all			:	outdir $(NAME)
+				@ echo $(GRN)$(basename $(NAME))$(CLR) Generated Successfully!
 
-$(NAME)		: 	$(OBJ)
-				@ echo Generating Standard $(NAME)..
-				@ $(AR) $(NAME) $(OBJ)
-				@ $(RL) $(NAME)
+outdir		:
+				@ $(CREATEDIR) $(OBJDIR)
 
-.c.o		:
+# Link
+$(NAME)		:	$(OBJECT) $(BONUS_OBJECT)
+				@ $(ARCHIVE) $(NAME) $(OBJECT) $(BONUS_OBJECT)
+				@ $(INDEXER) $(NAME)
+
+bonus		:	$(BONUS_OBJECT)
+				@ $(ARCHIVE) $(NAME) $(BONUS_OBJECT)
+				@ $(INDEXER) $(NAME)
+
+# Compile
+$(OBJDIR)%.o:	%.c
 				@ $(CC) $(CFLAGS) -c $< -o $@
 
+# Clean Objects
 clean		:
-				@ echo Removing Object Files..
-				@ $(RM) $(OBJ) $(B_OBJ)
+ifneq ($(wildcard $(OBJDIR)*.o),)
+	@ $(DELETE) $(OBJECT) $(BONUS_OBJECT)
+	@ $(DELETEDIR) $(OBJDIR)
+	@ echo $(YLW)$(basename $(NAME))$(CLR) Object Files Deleted!
+else
+	@ echo No $(RED)$(basename $(NAME))$(CLR) Object Files To Remove..
+endif
 
-fclean		:	clean
-				@ echo Removing $(NAME)..
-				@ $(RM) $(NAME)
+# Full Clean
+fclean		:
+ifneq ($(wildcard $(NAME)),)
+	@ $(DELETE) $(NAME)
+	@ $(DELETE) $(OBJECT) $(BONUS_OBJECT)
+	@ $(DELETEDIR) $(OBJDIR)
+	@ echo $(YLW)$(basename $(NAME))$(CLR) Binary \& Object Files Deleted!
+else
+	@ echo $(REG)No $(RED)$(basename $(NAME))$(CLR) Binary Or Object Files To Remove..
+endif
 
+# Recompile
 re			:	fclean all
 
-bonus		:	$(OBJ) $(B_OBJ)
-				@ echo Generating Bonus $(NAME)..
-				@ $(AR) $(NAME) $(OBJ) $(B_OBJ)
-				@ $(RL) $(NAME)
-
-.PHONY		:	all clean fclean re
+# Non-File Targets
+.PHONY		:	all bonus clean fclean re
