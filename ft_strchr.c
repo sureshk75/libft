@@ -16,12 +16,10 @@ char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
 
-	if (c > CHAR_MAX)
-		return ((char *)s);
 	i = -1;
 	while (s[++i] != c)
 	{
-		if (s[i] == '\0')
+		if (!s[i])
 			return (NULL);
 	}
 	return ((char *)s + i);
