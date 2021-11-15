@@ -21,7 +21,7 @@ char	*ft_strrchr(const char *s, int c)
 		i++;
 	while (s[i] != c)
 	{
-		if (!s[i--])
+		if (i-- == 0)
 			return (NULL);
 	}
 	return ((char *)s + i);
