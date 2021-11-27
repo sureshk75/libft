@@ -6,7 +6,7 @@
 #    By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 17:31:06 by schetty           #+#    #+#              #
-#    Updated: 2021/11/13 00:50:02 by schetty          ###   ########.fr        #
+#    Updated: 2021/11/27 10:09:48 by schetty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ SOURCE		:=	ft_atoi.c			ft_bzero.c			ft_calloc.c		\
 
 BONUS_SOURCE:=	ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c	\
 				ft_lstdelone.c		ft_lstiter.c		ft_lstlast.c	\
-				ft_lstmap.c			ft_lstnew.c			ft_lstsize.c
+				ft_lstmap.c			ft_lstnew.c			ft_lstsize.c	\
+				ft_lstgetbyindex.c
 
 OBJECT		:= 	$(patsubst %,$(OBJDIR)%,$(SOURCE:.c=.o))
 
