@@ -6,13 +6,13 @@
 /*   By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 09:45:17 by schetty           #+#    #+#             */
-/*   Updated: 2021/11/27 10:00:22 by schetty          ###   ########.fr       */
+/*   Updated: 2021/12/09 22:52:43 by schetty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstget(t_list *lst, int index)
+t_list	*ft_lstget(t_list *lst, int index)
 {
 	t_list	*ptr;
 	int		i;
@@ -28,5 +28,5 @@ int	ft_lstget(t_list *lst, int index)
 			ptr = ptr->next;
 		}
 	}
-	return (-1);
+	return (NULL);
 }

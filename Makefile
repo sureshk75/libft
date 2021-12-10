@@ -6,7 +6,7 @@
 #    By: schetty <schetty@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 17:31:06 by schetty           #+#    #+#              #
-#    Updated: 2021/11/27 10:09:48 by schetty          ###   ########.fr        #
+#    Updated: 2021/12/09 20:35:04 by schetty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SOURCE		:=	ft_atoi.c			ft_bzero.c			ft_calloc.c		\
 				ft_strjoin.c		ft_strlcat.c		ft_strlcpy.c	\
 				ft_strlen.c			ft_strmapi.c		ft_strncmp.c	\
 				ft_strnstr.c		ft_strrchr.c		ft_strtrim.c	\
-				ft_substr.c			ft_tolower.c		ft_toupper.c
+				ft_substr.c			ft_tolower.c		ft_toupper.c	\
+				ft_abs.c
 
 BONUS_SOURCE:=	ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c	\
 				ft_lstdelone.c		ft_lstiter.c		ft_lstlast.c	\
