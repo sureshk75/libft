@@ -16,24 +16,13 @@ CC			:=	gcc
 # Target Binary Program
 NAME		:=	libft.a
 
-# Directories
-OBJDIR		:= obj/
-
 # Flags, Libraries and Includes
 CFLAGS		:=	-Wall -Wextra -Werror
 
 # Functions
-ARCHIVE		:=	ar rc
+ARCHIVE		:=	ar r
 INDEXER		:=	ranlib
 DELETE		:=	rm -f
-CREATEDIR	:=	mkdir -p
-DELETEDIR	:=	rm -Rf
-
-# Colors
-GRN			:=	"\033[1;32m"
-RED			:=	"\033[1;31m"
-YLW			:=	"\033[1;33m"
-CLR			:=	"\033[0m"
 
 SOURCE		:=	ft_atoi.c			ft_bzero.c			ft_calloc.c		\
 				ft_intlen_base.c	ft_isalnum.c		ft_isalpha.c	\
@@ -55,50 +44,33 @@ BONUS_SOURCE:=	ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c	\
 				ft_lstmap.c			ft_lstnew.c			ft_lstsize.c	\
 				ft_lstget.c
 
-OBJECT		:= 	$(patsubst %,$(OBJDIR)%,$(SOURCE:.c=.o))
+OBJECT		:= 	$(SOURCE:.c=.o)
 
-BONUS_OBJECT:=	$(patsubst %,$(OBJDIR)%,$(BONUS_SOURCE:.c=.o))
+BONUS_OBJECT:=	$(BONUS_SOURCE:.c=.o)
 
-# Defauilt Make
-all			:	outdir $(NAME)
-				@ echo $(GRN)$(basename $(NAME))$(CLR) Generated Successfully!
-
-outdir		:
-				@ $(CREATEDIR) $(OBJDIR)
+# Default Make
+all			:	$(NAME)
 
 # Link
-$(NAME)		:	$(OBJECT) $(BONUS_OBJECT)
-				@ $(ARCHIVE) $(NAME) $(OBJECT) $(BONUS_OBJECT)
-				@ $(INDEXER) $(NAME)
+$(NAME)		:	$(OBJECT)
+				$(INDEXER) $(NAME)
 
 bonus		:	$(BONUS_OBJECT)
-				@ $(ARCHIVE) $(NAME) $(BONUS_OBJECT)
-				@ $(INDEXER) $(NAME)
+				$(INDEXER) $(NAME)
 
 # Compile
-$(OBJDIR)%.o:	%.c
-				@ $(CC) $(CFLAGS) -c $< -o $@
+%.o			:	%.c
+				$(CC) $(CFLAGS) -c $< -o $@
+				$(ARCHIVE) $(NAME) $@ $@
 
 # Clean Objects
 clean		:
-ifneq ($(wildcard $(OBJDIR)*.o),)
-	@ $(DELETE) $(OBJECT) $(BONUS_OBJECT)
-	@ $(DELETEDIR) $(OBJDIR)
-	@ echo $(YLW)$(basename $(NAME))$(CLR) Object Files Deleted!
-else
-	@ echo No $(RED)$(basename $(NAME))$(CLR) Object Files To Remove..
-endif
+				$(DELETE) $(OBJECT) $(BONUS_OBJECT)
 
 # Full Clean
 fclean		:
-ifneq ($(wildcard $(NAME)),)
-	@ $(DELETE) $(NAME)
-	@ $(DELETE) $(OBJECT) $(BONUS_OBJECT)
-	@ $(DELETEDIR) $(OBJDIR)
-	@ echo $(YLW)$(basename $(NAME))$(CLR) Binary \& Object Files Deleted!
-else
-	@ echo $(REG)No $(RED)$(basename $(NAME))$(CLR) Binary Or Object Files To Remove..
-endif
+				$(DELETE) $(NAME)
+				$(DELETE) $(OBJECT) $(BONUS_OBJECT)
 
 # Recompile
 re			:	fclean all
