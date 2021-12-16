@@ -51,26 +51,43 @@ BONUS_OBJECT:=	$(BONUS_SOURCE:.c=.o)
 # Default Make
 all			:	$(NAME)
 
-# Link
+# Compile & Link
 $(NAME)		:	$(OBJECT)
-				$(INDEXER) $(NAME)
+				@ echo Indexing $(basename $(NAME)):mandatory
+				@ $(INDEXER) $(NAME)
 
 bonus		:	$(BONUS_OBJECT)
-				$(INDEXER) $(NAME)
+				@ echo Indexing $(basename $(NAME)):bonus
+				@ $(INDEXER) $(NAME)
 
-# Compile
 %.o			:	%.c
-				$(CC) $(CFLAGS) -c $< -o $@
-				$(ARCHIVE) $(NAME) $@ $@
+				@ echo Generating \& Linking $(basename $@)
+				@ $(CC) $(CFLAGS) -c $< -o $@
+				@ $(ARCHIVE) $(NAME) $@
 
 # Clean Objects
 clean		:
-				$(DELETE) $(OBJECT) $(BONUS_OBJECT)
+ifneq ("$(wildcard ft_atoi.o)","")
+	@ echo Removing $(basename $(NAME)):mandatory objects
+	@ $(DELETE) $(OBJECT)
+else
+	@ echo No $(basename $(NAME)):mandatory objects to remove
+endif
+ifneq ("$(wildcard ft_lstnew.o)","")
+	@ echo Removing $(basename $(NAME)):bonus objects
+	@ $(DELETE) $(BONUS_OBJECT)
+else
+	@ echo No $(basename $(NAME)):bonus objects to remove
+endif
 
 # Full Clean
-fclean		:
-				$(DELETE) $(NAME)
-				$(DELETE) $(OBJECT) $(BONUS_OBJECT)
+fclean		:	clean
+ifneq ("$(wildcard $(NAME))","")
+	@ echo Removing $(basename $(NAME)):static library
+	@ $(DELETE) $(NAME)
+else
+	@ echo No $(basename $(NAME)):static library to remove
+endif
 
 # Recompile
 re			:	fclean all
